@@ -14,7 +14,9 @@ jobs:
 
       - name: Create ZIP Archive
         run: |
-          cd resourcepack  # Change this if your folder has a different name
+		  pwd
+		  ls -lah
+          cd foolishcraft-resourcepack  # Change this if your folder has a different name
           zip -r ../Foolish_Resource_Pack.zip .
           cd ..
 
