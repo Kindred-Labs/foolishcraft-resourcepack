@@ -2,7 +2,10 @@ name: Package and Release Resource Pack
 
 on:
   release:
-    types: [published]  # Runs only when a new release is published
+    types: [published]
+
+permissions:
+  contents: write 
 
 jobs:
   release:
