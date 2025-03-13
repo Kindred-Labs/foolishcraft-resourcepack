@@ -1,0 +1,32 @@
+name: Package and Release Resource Pack
+
+on:
+  release:
+    types: [published]  # Runs only when a new release is published
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Create ZIP Archive
+        run: |
+          cd resourcepack  # Change this if your folder has a different name
+          zip -r ../Foolish_Resource_Pack.zip .
+          cd ..
+
+      - name: Generate SHA-1 Hash
+        run: |
+          sha1sum Foolish_Resource_Pack.zip | awk '{ print $1 }' > sha1.txt
+
+      - name: Upload Resource Pack and SHA1 to Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            Foolish_Resource_Pack.zip
+            sha1.txt
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
