@@ -14,9 +14,9 @@ jobs:
 
       - name: Create ZIP Archive
         run: |
-            pwd
-            ls -lah
-            cd foolishcraft-resourcepack
+            rm -rf .github
+            rm -rf .git
+            rm -rf .gitignore
             zip -r ../Foolish_Resource_Pack.zip .
             cd ..
 
