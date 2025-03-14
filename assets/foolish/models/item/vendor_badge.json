@@ -1,4 +1,5 @@
 {
+	"credit": "Made with Blockbench",
 	"texture_size": [128, 128],
 	"textures": {
 		"2": "foolish:item/vendor_badge"
@@ -1331,12 +1332,12 @@
 		},
 		"firstperson_righthand": {
 			"rotation": [-180, 21, 180],
-			"translation": [-2.25, 3.25, 0],
+			"translation": [7, -3.5, -2.75],
 			"scale": [0.45, 0.45, 0.45]
 		},
 		"firstperson_lefthand": {
 			"rotation": [-180, 30, 180],
-			"translation": [-0.75, 3.75, 0],
+			"translation": [7, -2.25, 0],
 			"scale": [0.45, 0.45, 0.45]
 		},
 		"ground": {
