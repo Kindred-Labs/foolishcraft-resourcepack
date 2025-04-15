@@ -1,6 +1,7 @@
 name: Package and Release Resource Pack
 
 on:
+  workflow_dispatch:
   release:
     types: [published]
 
@@ -27,12 +28,18 @@ jobs:
         run: |
           cd ..
           HASH=$(sha1sum Foolish_Resource_Pack.zip | awk '{ print $1 }')
-          echo "sha1=$HASH" >> $GITHUB_ENV
-      
-      - name: Create SHA1 File
+          echo "SHA1: $HASH"
+          echo "sha1=$HASH" >> $GITHUB_OUTPUT
+
+      - name: Save hash to file named with hash
         run: |
           cd ..
           echo "${{ steps.hash.outputs.sha1 }}" > ${{ steps.hash.outputs.sha1 }}.txt
+
+      - name: Rename ZIP with SHA1
+        run: |
+          cd ..
+          mv Foolish_Resource_Pack.zip ${{ steps.hash.outputs.sha1 }}.zip
 
       - name: Upload Resource Pack and SHA1 to Release
         uses: softprops/action-gh-release@v2
