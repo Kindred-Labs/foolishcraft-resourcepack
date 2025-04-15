@@ -23,15 +23,22 @@ jobs:
             zip -r ../Foolish_Resource_Pack.zip .
 
       - name: Generate SHA-1 Hash
+        id: hash
         run: |
           cd ..
-          sha1sum Foolish_Resource_Pack.zip | awk '{ print $1 }' > sha1.txt
+          HASH=$(sha1sum Foolish_Resource_Pack.zip | awk '{ print $1 }')
+          echo "sha1=$HASH" >> $GITHUB_ENV
+      
+      - name: Create SHA1 File
+        run: |
+          cd ..
+          echo "${{ steps.hash.outputs.sha1 }}" > ${{ steps.hash.outputs.sha1 }}.txt
 
       - name: Upload Resource Pack and SHA1 to Release
         uses: softprops/action-gh-release@v2
         with:
           files: |
             ../Foolish_Resource_Pack.zip
-            ../sha1.txt
+            ../${{ steps.hash.outputs.sha1 }}.txt
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
